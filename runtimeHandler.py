@@ -3,13 +3,16 @@ from threading import Thread
 
 app = Flask('')
 
+
 @app.route('/')
 def main():
-  return "BOT Is Working!" 
+    return "Route is working!"
+
 
 def run():
-    app.run(host="0.0.0.0", port=8080) #don't touch this
+    app.run(host="0.0.0.0", port=8080)
 
-def keep_alive():
+
+def runtim_handler():
     server = Thread(target=run)
     server.start()
