@@ -35,6 +35,152 @@ class Info(commands.Cog):
 
         await ctx.reply(embed=pingEmbed)
 
+    @commands.command(aliases=["si", "guildinfo"])
+    async def serverinfo(self, ctx):
+        server = ctx.guild
+
+        serverRoles = ", ".join([str(r.name) for r in server.roles]
+                                ).replace("@everyone", "everyone")
+        if len(serverRoles) > 1024:
+            roles = "Too many roles to display"
+
+        serverEmbed = discord.Embed(
+            title="**Server information**",
+            description=f"**Server icons: ** [Click here]({server.icon_url})",
+            color=discord.Color.from_rgb(225, 225, 225)
+        )
+        serverEmbed.set_author(
+            name=server.name,
+            icon_url=server.icon_url
+        )
+        serverEmbed.set_thumbnail(url=server.icon_url)
+        serverEmbed.add_field(
+            name="Server name: ",
+            value=f"```yaml\n{server.name}```",
+            inline=True
+        )
+        serverEmbed.add_field(
+            name="**Server ID: **",
+            value=f"```yaml\n{server.id}```",
+            inline=True
+        )
+        serverEmbed.add_field(
+            name="**Server Owner: **",
+            value=f"```yaml\n{server.owner}```",
+            inline=True
+        )
+        serverEmbed.add_field(
+            name="**Server Region: **",
+            value=f"```yaml\n{server.region}```",
+            inline=True
+        )
+        serverEmbed.add_field(
+            name="**Verification Level: **",
+            value=f"```yaml\n{server.verification_level}```",
+            inline=True
+        )
+        serverEmbed.add_field(
+            name="**Server Member Count: **",
+            value=f"```yaml\n{server.member_count} Users```",
+            inline=True
+        )
+        serverEmbed.add_field(
+            name="**Server Created At: **",
+            value=f"```yaml\n{server.created_at}```",
+        )
+        serverEmbed.add_field(
+            name="**Server Roles: **",
+            value=serverRoles,
+            inline=False
+        )
+        serverEmbed.set_footer(
+            text="Requested by: " + ctx.author.name,
+            icon_url=ctx.author.avatar_url
+        )
+
+        await ctx.reply(embed=serverEmbed)
+
+    @commands.command(aliases=["ui"])
+    async def userinfo(self, ctx, member: discord.Member = None):
+        user = ctx.author if member is None else member
+
+        userRoles = ", ".join([str(r.name) for r in user.roles]).replace(
+            "@everyone", "everyone")
+        hypesquad_class = str(user.public_flags.all()).replace(
+            '[<UserFlags.', '').replace('>]', '').replace('_', ' ').replace(':', '').title()
+        hypesquad_class = ''.join(
+            [i for i in hypesquad_class if not i.isdigit()])
+        if len(userRoles) > 1024:
+            roles = "Too many roles to display"
+
+        if hypesquad_class == "[]":
+            hypesquad_class = "```yaml\nNone```"
+        if user.activity is None:
+            activity = "None"
+        userEmbed = discord.Embed(
+            title="**User information**",
+            description=f"**User icons: ** [Click here]({user.avatar_url})",
+            color=discord.Color.from_rgb(225, 225, 225)
+        )
+        userEmbed.set_author(
+            name=user.name,
+            icon_url=user.avatar_url
+        )
+        userEmbed.set_thumbnail(url=user.avatar_url)
+        userEmbed.add_field(
+            name="User name: ",
+            value=f"```yaml\n{user.name}```",
+            inline=True
+        )
+        userEmbed.add_field(
+            name="**User Discriminator: **",
+            value=f"```yaml\n{user.discriminator}```",
+            inline=True
+        )
+        userEmbed.add_field(
+            name="**User ID: **",
+            value=f"```yaml\n{user.id}```",
+            inline=True
+        )
+        userEmbed.add_field(
+            name="Badges: ",
+            value=hypesquad_class,
+            inline=True
+        )
+        userEmbed.add_field(
+            name="**User Status: **",
+            value=f"```yaml\n{user.status}```",
+            inline=True
+        )
+        userEmbed.add_field(
+            name="**User Activity: **",
+            value=f"```yaml\n{user.activity}```",
+            inline=True
+        )
+        userEmbed.add_field(
+            name="**User Created At: **",
+            value=f"```yaml\n{user.created_at}```",
+            inline=False
+        )
+        if ctx.guild is not None:
+            userEmbed.add_field(
+                name="**User Joined At: **",
+                value=f"```yaml\n{user.joined_at}```",
+                inline=False
+            )
+
+        userEmbed.add_field(
+            name="**User Roles: **",
+            value=userRoles,
+            inline=False
+        )
+        userEmbed.set_footer(
+            text="Requested by: " + ctx.author.name,
+            icon_url=ctx.author.avatar_url
+        )
+
+        await ctx.reply(embed=userEmbed)
+
 
 def setup(client):
     client.add_cog(Info(client))
