@@ -1,3 +1,4 @@
+from enum import Flag
 import discord
 from discord.ext import commands
 

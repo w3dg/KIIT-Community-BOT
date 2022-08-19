@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 #Temp files
 Temp/
+.vscode/
 
 # C extensions
 *.so
