@@ -1,15 +1,22 @@
-import discord
+import random
+import asyncio
 import os
-from discord.ext import commands
+from discord.ext.commands import bot
+from discord.utils import get
+from discord.ext import commands, tasks
+import discord
 
-import runtimeHandler
+# Gateway intents
+intents = discord.Intents.default()
+intents.members = True
+intents.presences = True
 
 # prefix
-client = commands.Bot(command_prefix="-")
+client = commands.Bot(command_prefix=",", intents=intents)
+client.remove_command('help')
+
 
 # on ready event
-
-
 @client.event
 async def on_ready():
     print("{0.user} is ready!".format(client))
@@ -68,8 +75,5 @@ for filename in os.listdir("./cogs"):
         client.load_extension(f"cogs.{filename[:-3]}")
 
 
-# runtimeHandler()
-# my_secret = os.environ['Token']
-# client.run()
+client.run('')
 
-client.run("")
