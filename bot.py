@@ -72,4 +72,4 @@ for filename in os.listdir("./cogs"):
 # my_secret = os.environ['Token']
 # client.run()
 
-client.run("OTYyNDM4NjczNDE1MTQzNDY1.GjKN8t.ziad0OVL18snkLEONWXak6FzPYiKWNydrrsm8E")
+client.run("")

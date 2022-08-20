@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+
 #Temp files
 Temp/
 .vscode/
@@ -112,6 +113,9 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+Include/
+Scripts/
+pyvenv.cfg
 
 # Spyder project settings
 .spyderproject
