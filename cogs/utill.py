@@ -51,5 +51,5 @@ class Utill(commands.Cog):
             await ctx.reply("Some error occured\nPlease try again...", delete_after=5)
 
 
-def setup(client):
-    client.add_cog(Utill(client))
+async def setup(client):
+    await client.add_cog(Utill(client))

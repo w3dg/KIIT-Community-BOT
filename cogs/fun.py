@@ -82,5 +82,5 @@ class Fun(commands.Cog):
         pass
 
 
-def setup(client):
-    client.add_cog(Fun(client))
+async def setup(client):
+    await client.add_cog(Fun(client))

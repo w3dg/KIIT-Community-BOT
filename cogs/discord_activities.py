@@ -12,5 +12,5 @@ class DiscordActivities(commands.Cog):
         Pass
 
 
-def setup(client):
-    client.add_cog(DiscordActivities(client))
+async def setup(client):
+    await client.add_cog(DiscordActivities(client))
