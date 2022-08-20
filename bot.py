@@ -64,10 +64,6 @@ async def on_command_errot(ctx, error):
         await ctx.send("User input error")
 
 
-@client.command()
-async def reload(ctx, extension):
-    client.unload_extension(f"cogs.{extension}")
-    client.load_extension(f"cogs.{extension}")
 
 
 async def load_extensions():
