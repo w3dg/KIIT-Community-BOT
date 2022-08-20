@@ -1,3 +1,0 @@
-discord.ext.context
-discord.py
-requests
