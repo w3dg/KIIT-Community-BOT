@@ -1,2 +1,3 @@
 # KIIT-Community-BOT
-Discord Bot
+
+Contribute to the main branch of this repository
